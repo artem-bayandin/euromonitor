@@ -1,17 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CrossCutting.Data.Extensions
 {
     public static class DbContextExtensions
     {
-        public static ModelBuilder TypeDateTimeToDatetime2(this ModelBuilder modelBuilder)
+        public static ModelBuilder TypeDateTimeToDatetime2(this ModelBuilder modelBuilder, string ignorePrefix = "")
         {
-            var propsQuery = modelBuilder
-                .Model
-                .GetEntityTypes()
+            var propsQuery = EntityTypes(modelBuilder, ignorePrefix)
                 .SelectMany(t => t.GetProperties());
 
             foreach (var property in propsQuery.Where(p => p.ClrType == typeof(DateTime) || p.ClrType == typeof(DateTime?)))
@@ -26,11 +25,9 @@ namespace CrossCutting.Data.Extensions
             return modelBuilder;
         }
 
-        public static ModelBuilder TypeStringToNvarchar255(this ModelBuilder modelBuilder)
+        public static ModelBuilder TypeStringToNvarchar255(this ModelBuilder modelBuilder, string ignorePrefix = "")
         {
-            var propsQuery = modelBuilder
-                .Model
-                .GetEntityTypes()
+            var propsQuery = EntityTypes(modelBuilder, ignorePrefix)
                 .SelectMany(t => t.GetProperties());
 
             foreach (var property in propsQuery.Where(p => p.ClrType == typeof(String)))
@@ -45,9 +42,9 @@ namespace CrossCutting.Data.Extensions
             return modelBuilder;
         }
 
-        public static ModelBuilder RemovePluralizingTableNameConvention(this ModelBuilder modelBuilder)
+        public static ModelBuilder RemovePluralizingTableNameConvention(this ModelBuilder modelBuilder, string ignorePrefix = "")
         {
-            foreach (IMutableEntityType entity in modelBuilder.Model.GetEntityTypes())
+            foreach (IMutableEntityType entity in EntityTypes(modelBuilder, ignorePrefix))
             {
                 entity.SetTableName(entity.DisplayName());
             }
@@ -55,14 +52,23 @@ namespace CrossCutting.Data.Extensions
             return modelBuilder;
         }
 
-        public static ModelBuilder SetOnDeleteBehaviorToRestrict(this ModelBuilder modelBuilder)
+        public static ModelBuilder SetOnDeleteBehaviorToRestrict(this ModelBuilder modelBuilder, string ignorePrefix = "")
         {
-            foreach (IMutableForeignKey relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            foreach (IMutableForeignKey relationship in EntityTypes(modelBuilder, ignorePrefix).SelectMany(e => e.GetForeignKeys()))
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
             return modelBuilder;
+        }
+
+        private static IEnumerable<IMutableEntityType> EntityTypes(ModelBuilder modelBuilder, string ignorePrefix)
+        {
+            if (!String.IsNullOrEmpty(ignorePrefix))
+            {
+                return modelBuilder.Model.GetEntityTypes().Where(x => !x.GetTableName().StartsWith(ignorePrefix)).AsEnumerable();
+            }
+            return modelBuilder.Model.GetEntityTypes();
         }
     }
 }

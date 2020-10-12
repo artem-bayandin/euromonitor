@@ -1,6 +1,7 @@
 ﻿using Application.Queries.Book;
 using Application.Queries.Books;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebAPI.Controllers.Base;
@@ -22,6 +23,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] BookQuery query)
         {
