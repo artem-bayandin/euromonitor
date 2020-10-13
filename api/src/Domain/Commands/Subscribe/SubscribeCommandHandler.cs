@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Domain.Common.CommandResults;
+using Domain.Entities;
 using Domain.Interfaces;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,7 +23,11 @@ namespace Domain.Commands.Subscribe
 
         public async Task<CommandResult> Handle(SubscribeCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var subs = _mapper.Map<Subscription>(request);
+            subs.UserId = _userService.UserId.Value.ToString();
+
+            await _context.Subscriptions.AddAsync(subs, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
 
             return CommandResult.Ok();
         }

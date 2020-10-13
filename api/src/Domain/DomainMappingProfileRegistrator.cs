@@ -1,4 +1,7 @@
 ﻿using CrossCutting.Automapper.Base;
+using Domain.Commands.Subscribe;
+using Domain.Entities;
+using System;
 using System.Reflection;
 
 namespace Domain
@@ -10,7 +13,9 @@ namespace Domain
         public DomainMappingProfileRegistrator()
         {
             // register command-to-entity maps
-            // CreateMap<CreateProductCommand, Product>();
+            CreateMap<SubscribeCommand, Subscription>()
+                .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(src => DateTime.UtcNow))
+                ;
         }
     }
 }

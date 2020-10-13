@@ -28,14 +28,19 @@ namespace Domain.Commands.Subscribe
                 .WithMessage(SubscribeCommandErrors.AlreadySubscribed);
         }
 
-        private async Task<bool> BookExists(Guid orderId, CancellationToken cancellationToken)
+        private async Task<bool> BookExists(Guid bookId, CancellationToken cancellationToken)
         {
-            return await _context.Books.AnyAsync(x => x.Id == orderId, cancellationToken);
+            return await _context.Books.AnyAsync(x => x.Id == bookId, cancellationToken);
         }
 
-        private async Task<bool> NotSubscribed(Guid orderId, CancellationToken cancellationToken)
+        private async Task<bool> NotSubscribed(Guid bookId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var subs = await _context
+                .Subscriptions
+                .FirstOrDefaultAsync(x => x.BookId == bookId 
+                                     && x.UserId == _userService.UserId.Value.ToString()
+                                     , cancellationToken);
+            return subs == null;
         }
     }
 }

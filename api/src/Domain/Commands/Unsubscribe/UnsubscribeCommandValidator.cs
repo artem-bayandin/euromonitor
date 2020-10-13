@@ -35,7 +35,12 @@ namespace Domain.Commands.Unsubscribe
 
         private async Task<bool> Subscribed(Guid bookId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var subs = await _context
+                .Subscriptions
+                .FirstOrDefaultAsync(x => x.BookId == bookId 
+                                     && x.UserId == _userService.UserId.Value.ToString()
+                                     , cancellationToken);
+            return subs != null;
         }
     }
 }

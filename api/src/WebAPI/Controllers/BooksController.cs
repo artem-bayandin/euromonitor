@@ -1,5 +1,6 @@
 ﻿using Application.Queries.Book;
 using Application.Queries.Books;
+using Application.Queries.Subscriptions;
 using Domain.Commands.Subscribe;
 using Domain.Commands.Unsubscribe;
 using MediatR;
@@ -43,6 +44,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Unsubscribe([FromRoute] UnsubscribeCommand request)
         {
             return Result(await Mediator.Send(request ?? new UnsubscribeCommand()));
+        }
+
+        [Authorize]
+        [HttpGet("subscriptions")]
+        public async Task<IActionResult> Subscriptions()
+        {
+            return Ok(await Mediator.Send(new SubscriptionsQuery()));
         }
     }
 }
