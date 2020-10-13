@@ -1,6 +1,6 @@
 ﻿using Application.Models;
 using AutoMapper;
-using Domain.Common.Commandresults;
+using Domain.Common.CommandResults;
 using Domain.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,4 @@
-﻿namespace Domain.Common.Commandresults
+﻿namespace Domain.Common.CommandResults
 {
     public class CreateCommandResult<T>
     {

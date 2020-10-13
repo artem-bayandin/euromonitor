@@ -7,7 +7,6 @@ using Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Linq;
 
 namespace Infrastructure.IoC
 {

@@ -1,4 +1,4 @@
-﻿using Domain.Common.Commandresults;
+﻿using Domain.Common.CommandResults;
 using System.Collections.Generic;
 using System.Net;
 

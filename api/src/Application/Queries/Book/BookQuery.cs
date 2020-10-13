@@ -1,5 +1,5 @@
 ﻿using Application.Models;
-using Domain.Common.Commandresults;
+using Domain.Common.CommandResults;
 using MediatR;
 using System;
 

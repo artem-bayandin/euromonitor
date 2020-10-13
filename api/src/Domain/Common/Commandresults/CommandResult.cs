@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Domain.Common.Commandresults
+namespace Domain.Common.CommandResults
 {
     public enum CommandResultStatuses
     {

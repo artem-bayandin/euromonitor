@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "d9981ba2-320f-4890-af79-6adde5ffc0a6",
+		"name": "Euromonitor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44313/api/books",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWVAZ21haWwuY29tIiwianRpIjoiMDJlZjY0ODItMGE2ZS00MTQ2LWEwYzgtMzBkZWUzNjYzMTlhIiwiZXhwIjoxNjAyNjM0NTM1LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjYxOTU1IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MjAwIn0.0laU-IQtWg3PRvR3D1iSvnwvaaL6qu5V1kak25e1ECk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44313/api/books/84ee2740-0df6-46b5-8d8b-376dccb52f39",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"books",
+						"84ee2740-0df6-46b5-8d8b-376dccb52f39"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"username@gmail.com\",\r\n\t\"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44313/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"username@gmail.com\",\n\t\"password\": \"password\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44313/api/auth/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ1c2VybmFtZUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI3NGQ0YWRjLTU2NzEtNGJiOS05NGQwLTI1YjM0NjlkZmVlOSIsImp0aSI6ImQ0YTEzODQxLWM2NWQtNGRhMi1hNDhkLTg3N2NmMDE2MTJjZCIsImV4cCI6MTYwMjYzNjEzOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo2MTk1NSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJ9.NanQpDMA0tX2d7_oe6tVVVrUL6uWgIw-SFXlOI9eN_Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44313/api/books/84ee2740-0df6-46b5-8d8b-376dccb52f39/subscribe",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"books",
+						"84ee2740-0df6-46b5-8d8b-376dccb52f39",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unsubscribe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWVAZ21haWwuY29tIiwianRpIjoiMDJlZjY0ODItMGE2ZS00MTQ2LWEwYzgtMzBkZWUzNjYzMTlhIiwiZXhwIjoxNjAyNjM0NTM1LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjYxOTU1IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MjAwIn0.0laU-IQtWg3PRvR3D1iSvnwvaaL6qu5V1kak25e1ECk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44313/api/books/84ee2740-0df6-46b5-8d8b-376dccb52f39/unsubscribe",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"books",
+						"84ee2740-0df6-46b5-8d8b-376dccb52f39",
+						"unsubscribe"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

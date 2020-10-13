@@ -1,4 +1,4 @@
-﻿using Domain.Common.Commandresults;
+﻿using Domain.Common.CommandResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

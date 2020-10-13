@@ -7,24 +7,35 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Queries.Book
+namespace Domain.Commands.Unsubscribe
 {
-    public class BookQueryValidator : AbstractValidator<BookQuery>
+    public class UnsubscribeCommandValidator : AbstractValidator<UnsubscribeCommand>
     {
         private readonly IEmContext _context;
+        private readonly IUserService _userService;
 
-        public BookQueryValidator(IEmContext context)
+        public UnsubscribeCommandValidator(IEmContext context, IUserService userService)
         {
             _context = context;
+            _userService = userService;
 
-            RuleFor(x => x.Id)
+            RuleFor(x => x.BookId)
                 .MustAsync(BookExists)
                 .WithMessage(ValidatorMessageExtensions.FormatMessage(CommonCustomFormatterErrors.EntityShouldExist, "Book"));
+
+            RuleFor(x => x.BookId)
+                .MustAsync(Subscribed)
+                .WithMessage(UnsubscribeCommandErrors.NotSubscribed);
         }
 
         private async Task<bool> BookExists(Guid bookId, CancellationToken cancellationToken)
         {
             return await _context.Books.AnyAsync(x => x.Id == bookId, cancellationToken);
+        }
+
+        private async Task<bool> Subscribed(Guid bookId, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

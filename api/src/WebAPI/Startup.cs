@@ -1,4 +1,5 @@
 using Domain.Auth;
+using Domain.Interfaces;
 using Infrastructure.Data.Contexts;
 using Infrastructure.IoC;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WebAPI.Infrastructure;
 
 namespace WebAPI
 {
@@ -27,6 +29,9 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // local implementation of interfaces
+            services.AddScoped<IUserService, UserService>();
+
             // custom IoC
             services.RegisterDependencies(Configuration);
 
