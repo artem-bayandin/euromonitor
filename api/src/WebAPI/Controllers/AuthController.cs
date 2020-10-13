@@ -21,17 +21,17 @@ namespace WebAPI.Controllers
     public class AuthController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        //private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
         public AuthController(IMediator mediator
             , UserManager<ApplicationUser> userManager
-            , RoleManager<IdentityRole> roleManager
+            //, RoleManager<IdentityRole> roleManager
             , IConfiguration configuration
             ) : base(mediator)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
+            //_roleManager = roleManager;
             _configuration = configuration;
         }
 
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.NameIdentifier, user.Id),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 

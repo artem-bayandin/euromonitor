@@ -13,6 +13,7 @@ namespace Infrastructure.Data.Contexts
         private const string _aspNetTablePrefix = "AspNet";
 
         public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<Subscription> Subscriptions { get; set; }
 
         public EmContext(DbContextOptions<EmContext> options) : base(options)
         {
@@ -26,7 +27,7 @@ namespace Infrastructure.Data.Contexts
 
             modelBuilder.TypeDateTimeToDatetime2(_aspNetTablePrefix);
             modelBuilder.TypeStringToNvarchar255(_aspNetTablePrefix);
-            modelBuilder.RemovePluralizingTableNameConvention(_aspNetTablePrefix);
+            //modelBuilder.RemovePluralizingTableNameConvention(_aspNetTablePrefix);
             modelBuilder.SetOnDeleteBehaviorToRestrict(_aspNetTablePrefix);
 
             base.OnModelCreating(modelBuilder);
@@ -37,6 +38,7 @@ namespace Infrastructure.Data.Contexts
             modelBuilder.Entity<ApplicationUser>(entity =>
             {
                 entity.ToTable(name: $"{_aspNetTablePrefix}Users");
+                entity.Property(x => x.Id).HasColumnType("nvarchar(36)"); // hack
             });
 
             modelBuilder.Entity<IdentityRole>(entity =>

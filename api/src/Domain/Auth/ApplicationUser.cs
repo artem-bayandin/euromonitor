@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Domain.Auth
 {
@@ -6,5 +8,7 @@ namespace Domain.Auth
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public virtual ICollection<Subscription> Subscriptions { get; set; }
     }
 }

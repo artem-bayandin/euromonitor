@@ -9,6 +9,7 @@ namespace Domain.Interfaces
     public interface IEmContext
     {
         DbSet<Book> Books { get; set; }
+        DbSet<Subscription> Subscriptions { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
